@@ -16,13 +16,13 @@ ENV AzureWebJobsDisableHomepage=true \
 
 LABEL maintainer="Microsoft" \
     org.opencontainers.image.created=$BUILD_DATE \
-    org.opencontainers.image.url="https://github.com/microsoft/developer-platform-pr" \
-    org.opencontainers.image.source="https://github.com/microsoft/developer-platform-pr" \
+    org.opencontainers.image.url="https://github.com/microsoft/developer-platform-devcenter" \
+    org.opencontainers.image.source="https://github.com/microsoft/developer-platform-devcenter" \
     org.opencontainers.image.version=$IMAGE_VERSION \
     org.opencontainers.image.vendor="Microsoft" \
     org.opencontainers.image.title="Microsoft Developer Platform DevCenter Provider" \
     org.opencontainers.image.description="The Microsoft Developer Platform DevCenter Provider." \
-    org.opencontainers.image.documentation="https://github.com/microsoft/developer-platform-pr/tree/main/providers/Microsoft.Developer.Providers.DevCenter" \
+    org.opencontainers.image.documentation="https://github.com/microsoft/developer-platform-devcenter" \
     org.opencontainers.image.licenses="MIT"
 
 RUN mkdir -p /home/site/wwwroot

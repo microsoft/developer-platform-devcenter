@@ -12,7 +12,7 @@
     <ContainerVersion>$(Version)</ContainerVersion>
     <ContainerTitle>Microsoft Developer Platform DevCenter Provider</ContainerTitle>
     <ContainerDescription>The Microsoft Developer Platform DevCenter Provider.</ContainerDescription>
-    <ContainerDocumentationUrl>https://github.com/microsoft/developer-platform-pr/tree/main/providers/Microsoft.Developer.Providers.DevCenter</ContainerDocumentationUrl>
+    <ContainerDocumentationUrl>https://github.com/microsoft/developer-platform-devcenter</ContainerDocumentationUrl>
     <ContainerRepository>developer-platform/provider-devcenter</ContainerRepository>
   </PropertyGroup>
 
