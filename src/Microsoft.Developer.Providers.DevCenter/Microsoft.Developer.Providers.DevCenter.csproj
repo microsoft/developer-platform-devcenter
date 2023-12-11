@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -6,6 +6,7 @@
     <!-- https://github.com/Azure/azure-functions-dotnet-worker/issues/2072 -->
     <FunctionsEnableWorkerIndexing>False</FunctionsEnableWorkerIndexing>
     <OutputType>Exe</OutputType>
+    <UserSecretsId>28acb7b0-09ee-4a45-8263-2c0c06810bc1</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup>
