@@ -1,4 +1,4 @@
-# Microsoft Developer Platform DevCenter Provider
+# Developer Platform DevCenter Provider
 
 [![developer-platform-devcenter](https://img.shields.io/github/v/release/microsoft/developer-platform-devcenter?logo=github)](https://github.com/microsoft/developer-platform-devcenter/releases)
 
