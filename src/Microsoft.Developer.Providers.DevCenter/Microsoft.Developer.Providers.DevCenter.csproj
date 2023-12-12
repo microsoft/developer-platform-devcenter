@@ -14,7 +14,8 @@
     <ContainerTitle>Microsoft Developer Platform DevCenter Provider</ContainerTitle>
     <ContainerDescription>The Microsoft Developer Platform DevCenter Provider.</ContainerDescription>
     <ContainerDocumentationUrl>https://github.com/microsoft/developer-platform-devcenter</ContainerDocumentationUrl>
-    <ContainerRepository>developer-platform/provider-devcenter</ContainerRepository>
+    <ContainerRepository>$(IMAGE_REPOSITORY)</ContainerRepository>
+    <ContainerRepository Condition=" '$(ContainerRepository)' == '' ">developer-platform/provider-devcenter</ContainerRepository>
   </PropertyGroup>
 
   <ItemGroup>

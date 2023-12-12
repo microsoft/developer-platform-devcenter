@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using Microsoft.Developer.Azure;
-using Microsoft.Developer.Data;
 using Microsoft.Developer.Entities.Serialization;
 using Microsoft.Developer.Hosting.Middleware;
 using Microsoft.Developer.Providers.DevCenter;
@@ -43,7 +42,7 @@ var host = new HostBuilder()
         services.AddDeveloperPlatform()
             .AddEntitySerialization()
             .AddAzure(context.Configuration)
-            .AddCosmos(context.Configuration)
+            // .AddCosmos(context.Configuration)
             .AddDevCenterProvider(builder => builder
                 .AddOptions(context.Configuration));
     })
