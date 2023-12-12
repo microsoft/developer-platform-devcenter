@@ -15,8 +15,8 @@
     <PackageVersion Include="Microsoft.Identity.Web" Version="2.16.0" />
     <PackageVersion Include="Microsoft.Identity.Web.Azure" Version="2.16.0" />
     <PackageVersion Include="Microsoft.Identity.Web.DownstreamApi" Version="2.16.0" />
-    <PackageVersion Include="Microsoft.Developer.Abstractions" version="0.2.27" />
-    <PackageVersion Include="Microsoft.Developer.Azure" version="0.2.27" />
+    <PackageVersion Include="Microsoft.Developer.Abstractions" version="0.2.30" />
+    <PackageVersion Include="Microsoft.Developer.Azure" version="0.2.30" />
     <PackageVersion Include="Microsoft.Developer.Data.Cosmos" version="0.2.27" />
     <PackageVersion Include="Microsoft.Developer.Hosting.Functions" version="0.2.27" />
     <PackageVersion Include="Microsoft.Developer.Providers" version="0.2.27" />
