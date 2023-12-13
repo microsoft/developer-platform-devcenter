@@ -43,8 +43,7 @@ var host = new HostBuilder()
             .AddEntitySerialization()
             .AddAzure(context.Configuration)
             // .AddCosmos(context.Configuration)
-            .AddDevCenterProvider(builder => builder
-                .AddOptions(context.Configuration));
+            .AddDevCenterProvider(builder => { });
     })
     .Build();
 

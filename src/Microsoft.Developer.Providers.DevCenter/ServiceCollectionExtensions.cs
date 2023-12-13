@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Developer.Providers.DevCenter;
@@ -19,18 +18,4 @@ public static class ServiceCollectionExtensions
     }
 
     private sealed record DcBuilder(IDeveloperPlatformBuilder Builder, IServiceCollection Services) : IDevCenterProviderBuilder;
-
-
-    public static IDevCenterProviderBuilder AddCosmos(this IDevCenterProviderBuilder builder)
-    {
-        return builder;
-    }
-
-    public static IDevCenterProviderBuilder AddOptions(this IDevCenterProviderBuilder builder, IConfiguration configuration)
-    {
-        // builder.Services
-        //     .Configure<GitHubOptions>(configuration.GetSection(GitHubOptions.Section));
-
-        return builder;
-    }
 }
