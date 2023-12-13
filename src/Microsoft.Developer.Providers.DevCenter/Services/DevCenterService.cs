@@ -10,10 +10,11 @@ using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using Microsoft.Developer.Azure;
 using Microsoft.Developer.Entities;
+using Azure.ResourceManager;
 
 namespace Microsoft.Developer.Providers.DevCenter;
 
-public class DevCenterService(IUserArmService arm, ClaimsPrincipal user, ILogger<DevCenterService> log) : IDevCenterService
+public class DevCenterService(IUserTokenCredentialFactory tokenFactory, ClaimsPrincipal user, ArmClient arm, ILogger<DevCenterService> log) : IDevCenterService
 {
     // The AAD object id of the user.
     // If value is 'me', the identity is taken from the authentication context.
@@ -39,7 +40,7 @@ public class DevCenterService(IUserArmService arm, ClaimsPrincipal user, ILogger
 
         if (!devCenterClients.TryGetValue(key, out var client))
         {
-            client = new DevCenterClient(devCenter.Endpoint, arm.GetTokenCredential(user));
+            client = new DevCenterClient(devCenter.Endpoint, tokenFactory.GetTokenCredential(user));
             devCenterClients[key] = client;
         }
 
@@ -56,7 +57,7 @@ public class DevCenterService(IUserArmService arm, ClaimsPrincipal user, ILogger
 
         if (!deploymentEnvironmentsClients.TryGetValue(key, out var client))
         {
-            client = new DeploymentEnvironmentsClient(devCenter.Endpoint, arm.GetTokenCredential(user));
+            client = new DeploymentEnvironmentsClient(devCenter.Endpoint, tokenFactory.GetTokenCredential(user));
             deploymentEnvironmentsClients[key] = client;
         }
 
@@ -73,7 +74,7 @@ public class DevCenterService(IUserArmService arm, ClaimsPrincipal user, ILogger
 
         if (!devBoxClients.TryGetValue(key, out var client))
         {
-            client = new DevBoxesClient(devCenter.Endpoint, arm.GetTokenCredential(user));
+            client = new DevBoxesClient(devCenter.Endpoint, tokenFactory.GetTokenCredential(user));
             devBoxClients[key] = client;
         }
 
@@ -100,7 +101,6 @@ public class DevCenterService(IUserArmService arm, ClaimsPrincipal user, ILogger
     internal async Task<List<T>> GetResourceGraphResourcesAsync<T>(string queryString, CancellationToken token = default)
     {
         var tenant = arm
-            .GetArmClient(user)
             .GetTenants()
             .First();
 
