@@ -14,6 +14,7 @@ namespace Microsoft.Developer.Providers.DevCenter.API;
 public class GetEntities
 {
     private static readonly EntityKind[] supportedKinds = [
+        EntityKind.Provider,
         EntityKind.Environment,
         EntityKind.Template
     ];
@@ -40,7 +41,7 @@ public class GetEntities
             devCenter.GetEnvironmentEntitiesAsync(TemporaryConstants.DevCenter, token),
             devCenter.GetTemplateEntitiesAsync(TemporaryConstants.DevCenter, token));
 
-        return new EntitiesResult(entities);
+        return new EntitiesResult([.. entities.SelectMany(e => e), ProviderEntity.Create()]);
     }
 
     [Function(nameof(GetEntitiesByKind))]
@@ -50,12 +51,14 @@ public class GetEntities
     {
         var log = context.GetLogger<GetEntities>();
 
-        var entityRef = context.Features.Get<IDeveloperPlatformRequestFeature>()
-            ?? throw new InvalidOperationException("Unable to get EntityRef from context.Features");
-
-        if (!supportedKinds.Contains(entityRef.Kind))
+        if (!supportedKinds.Contains(kind))
         {
             return EntitiesResult.Empty;
+        }
+
+        if (kind == EntityKind.Provider)
+        {
+            return new EntitiesResult([ProviderEntity.Create()]);
         }
 
         var devCenter = context.Features.GetRequiredFeature<IDeveloperPlatformDevCenterFeature>().DevCenterService;
@@ -66,12 +69,12 @@ public class GetEntities
             return new NotFoundResult();
         }
 
-        if (entityRef.Kind == EntityKind.Environment)
+        if (kind == EntityKind.Environment)
         {
             return new EntitiesResult(await devCenter.GetEnvironmentEntitiesAsync(TemporaryConstants.DevCenter, token));
         }
 
-        if (entityRef.Kind == EntityKind.Template)
+        if (kind == EntityKind.Template)
         {
             return new EntitiesResult(await devCenter.GetTemplateEntitiesAsync(TemporaryConstants.DevCenter, token));
         }
