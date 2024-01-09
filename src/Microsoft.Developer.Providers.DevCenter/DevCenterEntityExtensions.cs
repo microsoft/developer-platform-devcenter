@@ -211,20 +211,20 @@ public static class DevCenterEntityExtensions
     }
 
 
-    public static TemplateRef CreateEntityRef(this EnvironmentDefinition definition)
+    public static EntityRef CreateEntityRef(this EnvironmentDefinition definition)
     {
         var devCenterName = definition.DevCenter?.Name ?? throw new ArgumentException("Could not resolve devcenter name from environmentDefinition");
         var catalogName = definition.CatalogName ?? throw new ArgumentException("Could not resolve catalog name from environmentDefinition");
         var definitionName = definition.Name ?? throw new ArgumentException("Could not resolve catalog name from environmentDefinition");
 
         // TODO: this doesn't account for special chars
-        return TemplateRef.Create($"{catalogName}-{definitionName}", devCenterName);
+        return new(EntityKind.Template) { Name = $"{catalogName}-{definitionName}", Namespace = devCenterName };
     }
 
     public static EntityRef EntityRef(this Model.Environment environment)
     {
         var devCenterName = environment.DevCenter?.Name ?? throw new ArgumentException("Could not resolve devcenter name from devcenter environment");
-        // var projectName = environment.CatalogName ?? throw new ArgumentException("Could not resolve projecxt name from devcenter environment");
+        // var projectName = environment.CatalogName ?? throw new ArgumentException("Could not resolve project name from devcenter environment");
         var name = environment.Name ?? throw new ArgumentException("Could not resolve name from devcenter environment");
 
         // TODO: this doesn't account for special chars

@@ -25,13 +25,10 @@ public class GetEntity
     {
         var log = context.GetLogger<GetEntity>();
 
-        var request = context.Features.Get<IDeveloperPlatformRequestFeature>()
-            ?? throw new InvalidOperationException("Unable to get EntityRef from context.Features");
-
-        var entityRef = new EntityRef(request.Kind)
+        var entityRef = new EntityRef(kind)
         {
-            Name = request.Name,
-            Namespace = request.Namespace
+            Name = name,
+            Namespace = @namespace
         };
 
         if (!supportedKinds.Contains(entityRef.Kind))
@@ -39,12 +36,18 @@ public class GetEntity
             return new NotFoundResult();
         }
 
+        if (entityRef.Kind == EntityKind.Provider)
+        {
+            return ProviderEntity.Create() is { } provider && provider.GetEntityRef().Equals(entityRef)
+                ? new EntityResult(provider) : new NotFoundResult();
+        }
+
         if (entityRef.Namespace.IsEmpty)
         {
             return new BadRequestObjectResult("Unable to get devcenter from namespace");
         }
 
-        // namespace is always the devcenter name
+        // namespace is always the devcenter name (unless kind is provider)
         if (entityRef.Namespace.Equals(Entity.Defaults.Namespace))
         {
             return new BadRequestObjectResult($"Invalid namespace '{entityRef.Namespace}'.");
