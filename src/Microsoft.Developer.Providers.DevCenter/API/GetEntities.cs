@@ -14,6 +14,7 @@ namespace Microsoft.Developer.Providers.DevCenter.API;
 public class GetEntities
 {
     private static readonly EntityKind[] supportedKinds = [
+        EntityKind.Provider,
         EntityKind.Environment,
         EntityKind.Template
     ];
